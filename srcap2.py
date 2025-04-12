@@ -13,7 +13,7 @@ options.add_argument('--disable-gpu')
 driver = webdriver.Chrome(options=options)
 
 # Cargar página
-url = 'https://www.tennisabstract.com/cgi-bin/player-classic.cgi?p=JannikSinner&f=ACareerqq'
+url = 'https://www.tennisabstract.com/cgi-bin/player-classic.cgi?p=JannikSinner&f=ACareerqqs00&view=h2h'
 driver.get(url)
 time.sleep(3)  # Esperar a que se cargue el contenido dinámico
 
@@ -22,7 +22,7 @@ soup = BeautifulSoup(driver.page_source, 'lxml')
 driver.quit()
 
 # Extraer la tabla de partidos
-table = soup.find('table', {'id': 'matches'})
+table = soup.find('table', {'id': 'Head-to-Head Records'})
 rows = table.find_all('tr')
 
 # Encabezados
@@ -39,4 +39,4 @@ df = pd.DataFrame(data, columns=headers)
 print(df.head())
 
 # Guardar si quieres
-df.to_csv("sinner_matches.csv", index=False)
+df.to_csv("sinner_matjhbches.csv", index=False)
