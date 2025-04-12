@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import os
 
-# Diccionario con nombres e IDs de jugadores
+# Diccionario de jugadores con su ID en TennisAbstract
 players = {
     'CarlosAlcaraz': '207989/Carlos-Alcaraz',
     'JannikSinner': '206173/Jannik-Sinner',
@@ -27,75 +27,50 @@ options = Options()
 options.add_argument('--headless')
 options.add_argument('--disable-gpu')
 
-def scrape_table(player_name, player_path, table_name, output_subfolder, suffix):
-    url = f"https://www.tennisabstract.com/cgi-bin/player-more.cgi?p={player_path}&table={table_name}"
-    output_folder = os.path.join(output_subfolder)
+def scrape_mcp_table(table_name, output_folder, suffix):
     os.makedirs(output_folder, exist_ok=True)
+    for name, player_path in players.items():
+        print(f"Procesando {suffix} para {name}...")
+        url = f"https://www.tennisabstract.com/cgi-bin/player-more.cgi?p={player_path}&table={table_name}"
 
-    driver = webdriver.Chrome(options=options)
-    try:
-        driver.get(url)
-        WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//table")))
-        soup = BeautifulSoup(driver.page_source, 'lxml')
-        tables = soup.find_all('table')
+        driver = webdriver.Chrome(options=options)
+        try:
+            driver.get(url)
+            WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//table")))
+            soup = BeautifulSoup(driver.page_source, 'lxml')
+            tables = soup.find_all('table')
 
-        # Buscar tabla más consistente (mayor número de columnas en la primera fila)
-        best_table = None
-        max_cols = 0
-        for table in tables:
-            rows = table.find_all('tr')
-            if not rows:
-                continue
-            headers = [col.get_text(strip=True) for col in rows[0].find_all(['td', 'th'])]
-            if len(headers) > max_cols:
-                max_cols = len(headers)
-                best_table = table
+            if len(tables) > 8:
+                table = tables[8]
+                rows = table.find_all('tr')
+                data = []
+                for row in rows:
+                    cols = [col.get_text(strip=True) for col in row.find_all(['td', 'th'])]
+                    if cols:
+                        data.append(cols)
 
-        if best_table:
-            data = []
-            for row in best_table.find_all('tr'):
-                cols = [col.get_text(strip=True) for col in row.find_all(['td', 'th'])]
-                if cols:
-                    data.append(cols)
+                headers = data[0]
+                data_rows = data[1:]
+                df = pd.DataFrame(data_rows, columns=headers)
 
-            headers = data[0]
-            data_rows = [row for row in data[1:] if len(row) == len(headers)]
-            df = pd.DataFrame(data_rows, columns=headers)
+                output_path = os.path.join(output_folder, f"{name}_{suffix}.csv")
+                df.to_csv(output_path, index=False)
+                print(f"Guardado en: {output_path}")
+            else:
+                print(f"No se encontró la tabla 8 para {name} ({suffix})")
 
-            output_path = os.path.join(output_folder, f"{player_name}_{suffix}.csv")
-            df.to_csv(output_path, index=False)
-            print(f"{suffix} guardado para {player_name} en: {output_path}")
-        else:
-            print(f"No se encontró una tabla válida para {player_name} ({suffix})")
-
-    except TimeoutException:
-        print(f"Tiempo de espera agotado para {player_name} ({suffix})")
-    except Exception as e:
-        print(f"Error con {player_name} ({suffix}): {e}")
-    finally:
-        driver.quit()
-
-def scrape_mcp_serve():
-    for name, path in players.items():
-        scrape_table(name, path, "mcp-serve", "calidad_servicio", "servicio")
-
-def scrape_mcp_return():
-    for name, path in players.items():
-        scrape_table(name, path, "mcp-return", "calidad_resto", "resto")
-
-def scrape_mcp_rally():
-    for name, path in players.items():
-        scrape_table(name, path, "mcp-rally", "calidad_rally", "rally")
-
-def scrape_mcp_tactics():
-    for name, path in players.items():
-        scrape_table(name, path, "mcp-tactics", "calidad_tactics", "tactics")
+        except TimeoutException:
+            print(f"Tiempo de espera agotado para {name} ({suffix})")
+        except Exception as e:
+            print(f"Error inesperado con {name} ({suffix}): {e}")
+        finally:
+            driver.quit()
 
 def main():
-    #scrape_mcp_serve()
-    #scrape_mcp_return()
-    scrape_mcp_rally()
-    scrape_mcp_tactics()
+    scrape_mcp_table("mcp-serve", "calidad_servicio", "servicio")
+    scrape_mcp_table("mcp-return", "calidad_de_resto", "resto")
+    scrape_mcp_table("mcp-rally", "calidad_rally", "rally")
+    scrape_mcp_table("mcp-tactics", "calidad_tactics", "tactics")
 
 if __name__ == "__main__":
     main()
