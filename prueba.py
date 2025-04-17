@@ -1,71 +1,30 @@
 import pandas as pd
-import re
+import os
 
-# Cargar CSV
-df = pd.read_csv('Tests/player_stats/AlexanderZverev_matches_full.csv')
+# Carpetas
+input_folder = 'Tests/calidad_de_resto'
+output_folder = 'Tests/calidad_de_resto_limpio'
+os.makedirs(output_folder, exist_ok=True)
 
-def clean_set_score(set_str):
-    """Extrae el resultado de un set en formato int-int, eliminando tiebreaks y texto."""
-    set_str = re.sub(r'\(.*?\)', '', set_str)  # elimina tiebreaks: (4), (7-5), etc.
-    set_str = set_str.replace('ch', '')  # elimina 'ch'
-    if '-' not in set_str:
-        return None
-    parts = set_str.strip().split('-')
-    if len(parts) != 2:
-        return None
-    try:
-        return int(parts[0]), int(parts[1])
-    except ValueError:
-        return None
+# Procesar cada CSV en la carpeta
+for filename in os.listdir(input_folder):
+    if filename.endswith('.csv'):
+        input_path = os.path.join(input_folder, filename)
+        df = pd.read_csv(input_path)
 
-def get_winner(row):
-    match = str(row['match'])
-    score = str(row['Score'])
-
-    # Revisar si el match tiene la forma esperada
-    if 'd.' not in match:
-        return None
-
-    # Dividir en jugador 1 y 2
-    parts = match.split('d.')
-    if len(parts) != 2:
-        return None
-
-    player1 = parts[0].strip()
-    player2 = parts[1].strip()
-
-    # Identificar si Zverev es local (player1) o visitante (player2)
-    zverev_local = 'Zverev' in player1
-
-    # Contar sets ganados
-    zverev_sets = 0
-    rival_sets = 0
-
-    for set_raw in score.split():
-        set_score = clean_set_score(set_raw)
-        if set_score is None:
+        if 'Result' not in df.columns:
+            print(f"{filename}: no se encontró columna 'Result', se omite.")
             continue
-        s1, s2 = set_score
-        if zverev_local:
-            if s1 > s2:
-                zverev_sets += 1
-            elif s1 < s2:
-                rival_sets += 1
-        else:
-            if s2 > s1:
-                zverev_sets += 1
-            elif s2 < s1:
-                rival_sets += 1
 
-    if zverev_sets > rival_sets:
-        return 'W'
-    elif rival_sets > zverev_sets:
-        return 'L'
-    else:
-        return None  # empate o error
+        # Limpiar columna Result y dividirla
+        df['Result'] = df['Result'].astype(str).str.strip()
+        df['W_or_L'] = df['Result'].str[0]
+        df['Rival'] = df['Result'].str.extract(r'vs(.+)', expand=False).str.strip()
 
-# Aplicar la función
-df['W_or_L'] = df.apply(get_winner, axis=1)
+        # Eliminar columna original
+        df = df.drop(columns=['Result'])
 
-# Guardar el nuevo archivo
-df.to_csv('zverev_partidos_con_resultado2.csv', index=False)
+        # Guardar nuevo CSV
+        output_path = os.path.join(output_folder, filename)
+        df.to_csv(output_path, index=False)
+        print(f"{filename} procesado correctamente.")

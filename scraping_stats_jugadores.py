@@ -5,7 +5,7 @@ import pandas as pd
 import time
 import os
 
-def extract_match_table(url):
+def extract_match_table(url):               
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
