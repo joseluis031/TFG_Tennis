@@ -1,0 +1,58 @@
+Informe de análisis estratégico: JannikSinner vs NovakDjokovic
+
+--- Perfil de JannikSinner ---
+Victorias: 306, Derrotas: 98, Ratio de Victorias: 0.76
+Superficies más efectivas (por % de puntos ganados):
+  TPW: TPW=0.00%, RPW=0.00%
+  RPW: TPW=0.00%, RPW=0.00%
+Dominance Ratio medio: 1.36
+Estadísticas de servicio:
+  1st Serve Points Won %: 75.33%
+  2nd Serve Points Won %: 55.26%
+  1st Serve In %: 59.59%
+  Double Fault %: 2.76%
+  Ace %: 7.71%
+Estadísticas de devolución:
+  Return Points Won (RPW) %: 40.84%
+  v1st% (Rival 1st Serve Won %): 32.78%
+  v2nd% (Rival 2nd Serve Won %): 53.79%
+  Opponent Ace Ratio (vA%): 6.71%
+Break points:
+  Break Points Converted: 0.47
+  Break Points Saved: 0.64
+Oponentes más frecuentes:
+  (1)Daniil Medvedev: 3 veces
+  (1)Novak Djokovic: 3 veces
+  (4)Stefanos Tsitsipas: 2 veces
+  (10)Sinnerd.Laslo Djere: 2 veces
+  (2)Carlos Alcaraz: 2 veces
+
+--- Perfil de NovakDjokovic ---
+Victorias: 1101, Derrotas: 214, Ratio de Victorias: 0.84
+Superficies más efectivas (por % de puntos ganados):
+  TPW: TPW=0.00%, RPW=0.00%
+  RPW: TPW=0.00%, RPW=0.00%
+Dominance Ratio medio: 1.49
+Estadísticas de servicio:
+  1st Serve Points Won %: 75.06%
+  2nd Serve Points Won %: 56.87%
+  1st Serve In %: 65.03%
+  Double Fault %: 2.93%
+  Ace %: 7.71%
+Estadísticas de devolución:
+  Return Points Won (RPW) %: 42.92%
+  v1st% (Rival 1st Serve Won %): 34.43%
+  v2nd% (Rival 2nd Serve Won %): 55.83%
+  Opponent Ace Ratio (vA%): 6.46%
+Break points:
+  Break Points Converted: 0.48
+  Break Points Saved: 0.63
+Oponentes más frecuentes:
+  (2)Rafael Nadal: 14 veces
+  (1)Roger Federer: 9 veces
+  (1)Rafael Nadal: 8 veces
+  (3)Roger Federer: 7 veces
+  (2)Djokovicd.(1)Rafael Nadal: 7 veces
+
+--- Recomendaciones estratégicas ---
+NovakDjokovic debería:  Tiene mejor desempeño al resto que JannikSinner, debería presionar más en los juegos de devolución. Dominance Ratio superior, puede mantener el control del ritmo de juego.
