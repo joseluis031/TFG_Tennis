@@ -40,6 +40,8 @@ def get_surface_performance(df):
 
 # Calcula la cantidad de victorias, derrotas y el ratio de victorias
 def get_win_loss_ratio(df):
+    print("Columnas disponibles:", df.columns.tolist())
+
     wins = df[df["W_or_L"] == "W"].shape[0]
     losses = df[df["W_or_L"] == "L"].shape[0]
     return {
