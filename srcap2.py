@@ -115,3 +115,18 @@ for player in players:
     if table_h2h:
         output_file = f"h2h_results2/{player}_h2h2.csv"
         table_to_csv(table_h2h, player, output_file)
+
+    # Elo ratings
+# # URL del ranking Elo
+# url = "https://tennisabstract.com/reports/atp_elo_ratings.html"
+
+# # Leer todas las tablas de la página
+# tables = pd.read_html(url)
+
+# # Seleccionar la primera tabla (es la correcta)
+# elo_df = tables[2]
+
+# # Guardar en CSV
+# elo_df.to_csv("elo_ratings.csv", index=False)
+
+# print("Tabla de Elo ratings guardada como elo_ratings.csv")

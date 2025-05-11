@@ -20,6 +20,7 @@ players = {
     'CasperRuud': '134770/Casper-Ruud',
     'HubertHurkacz': '128034/Hubert-Hurkacz',
     'HolgerRune': '208029/Holger-Rune'
+    
 }
 
 # Configuración Selenium
