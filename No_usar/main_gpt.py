@@ -1,7 +1,7 @@
 import os
-from load_data import load_all_player_data
-from compare_player import compare_players
-from generate_report_gpt import generate_text_report_gpt
+from No_usar.load_data import load_all_player_data
+from No_usar.compare_player import compare_players
+from No_usar.generate_report_gpt import generate_text_report_gpt
 
 def main():
     print("Cargando datos de jugadores...\n")

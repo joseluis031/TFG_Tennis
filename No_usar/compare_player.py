@@ -1,4 +1,4 @@
-from analyze_player import summarize_player
+from No_usar.analyze_player import summarize_player
 
 # Compara dos jugadores usando sus DataFrames y genera un resumen combinado
 def compare_players(df1, df2, name1="Jugador 1", name2="Jugador 2"):
