@@ -83,6 +83,6 @@ for player in players:
 
     # Guardar CSV
     df_final.to_csv(os.path.join(output_dir, f"{player}_matches_full.csv"), index=False)
-    print(f"✅ Datos guardados para {player}.")
+    print(f"Datos guardados para {player}.")
 
-print("\n🎉 Todo listo. Archivos guardados en la carpeta 'player_stats'.")
+print("\nTodo listo. Archivos guardados en la carpeta 'player_stats'.")
