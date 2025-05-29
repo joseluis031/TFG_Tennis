@@ -23,7 +23,7 @@ players = [
 ]
 
 # Carpeta donde guardar los archivos
-output_folder = "splits_results"
+output_folder = "splkkkits_results"
 os.makedirs(output_folder, exist_ok=True)
 
 # Configurar Selenium
