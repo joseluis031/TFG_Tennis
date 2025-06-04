@@ -14,14 +14,20 @@ import re
 
 # === Diccionarios descriptivos para perfiles ===
 dic_saque = {
-    's': 'JUGADOR PELIGROSO AL SAQUE',
-    'a': 'JUGADOR NORMAL AL SAQUE',
-    'b': 'JUGADOR MALO AL SAQUE'
+    's': 'JUGADOR PELIGROSO',
+    'a': 'JUGADOR BUENO',
+    'b': 'JUGADOR NORMAL'
 }
 
 dic_resto = {
-    's': 'JUGADOR PELIGROSO AL RESTO',
-    'a': 'JUGADOR BUENO AL RESTO',
+    's': 'JUGADOR PELIGROSO',
+    'a': 'JUGADOR BUENO AL ',
+    'b': 'JUGADOR NORMAL AL RESTO'
+}
+
+dic_break_saque = {
+    's': 'JUGADOR PELIGROSO EN PUNTOS/JUEGOS CLAVE AL SAQUE',
+    'a': 'JUGADOR BUENO EN PUNTOS/JUEGOS CLAVE AL SAQUE',
     'b': 'JUGADOR NORMAL AL RESTO'
 }
 # === Funciones auxiliares ===
@@ -91,15 +97,28 @@ def mostrar_perfil(nombre):
     st.markdown(f"**Edad:** {row['Age']}")
     st.markdown(f"**Mano:** {row['Hand']}")
     st.markdown(f"**Backhand:** {row['Backhand']}")
+    # Mostrar ranking Elo general
+    st.markdown(f"**Elo Rank:** {row['Elo Rank']}")
 
-    # Traducción con diccionarios
-    valor_saque = dic_saque.get(row['saque'], 'Desconocido')
-    valor_resto = dic_resto.get(row['resto'], 'Desconocido')
+    # Mostrar ranking Elo según superficie
+    if superficie == "Clay":
+        st.markdown(f"**Elo Rank en Supeficie:** {row['cElo Rank']}")
+    elif superficie == "Hard":
+        st.markdown(f"**hElo Rank en Superficie:** {row['hElo Rank']}")
+
+    # Elegir columnas dinámicas según la superficie
+    sufijo = '_clay' if superficie == "Clay" else ''
+
+    # Obtener los valores correctos según la superficie
+    valor_saque = dic_saque.get(row[f'saque{sufijo}'], 'Desconocido')
+    valor_resto = dic_saque.get(row[f'resto{sufijo}'], 'Desconocido')
+    valor_break_saque = dic_saque.get(row[f'break_saque{sufijo}'], 'Desconocido')
+    valor_break_resto = dic_saque.get(row[f'break_resto{sufijo}'], 'Desconocido')
 
     st.markdown(f"**Nivel Saque:** {valor_saque}")
     st.markdown(f"**Nivel Resto:** {valor_resto}")
-    st.markdown(f"**Break con Saque:** {row['break_saque']}")
-    st.markdown(f"**Break con Resto:** {row['break_resto']}")
+    st.markdown(f"**Nivel en puntos/juegos clave al servicio:** {valor_break_saque}")
+    st.markdown(f"**Nivel en puntos/juegos clave al resto:** {valor_break_resto}")
 
 
 # Layout principal: 3 columnas
