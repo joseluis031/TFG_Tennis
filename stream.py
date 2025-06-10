@@ -6,9 +6,10 @@ from perfiles import mostrar_perfil
 from enfrentamientos import mostrar_enfrentamientos, convertir_nombre, obtener_h2h_streamlit
 from comparativa import mostrar_comparativas
 from pred_elo import mostrar_probabilidad
+from agente_llm import generar_analisis_llm
 
 st.set_page_config(page_title="Comparador de Tenis", layout="wide")
-st.title("🎾 Comparador de Jugadores de Tenis")
+st.title("🎾 Informe Pre-partido con Inteligencia Artificial")
 
 # === Utilidad para separar nombre y apellido ===
 def separar_nombre(nombre):
@@ -62,3 +63,16 @@ with col3:
 
 # Mostrar probabilidad al final
 mostrar_probabilidad(jug1, jug2, df_perfiles, superficie)
+
+df_llm = pd.read_csv("Limpios_llm/Juego_2024_25/merged_hard.csv")  # Asegúrate que coincida con los nombres usados en `jug1` y `jug2`
+
+st.markdown("## 🧠 Informe táctico generado por IA")
+
+if nombre1 != nombre2:
+    if st.button("🔍 Generar informe profesional con LLM"):
+        with st.spinner("Generando informe... esto puede tardar unos segundos..."):
+            resultado = generar_analisis_llm(nombre1, nombre2, df_llm)
+            st.markdown("### 📝 Informe:")
+            st.write(resultado)
+else:
+    st.warning("⚠️ Debes elegir dos jugadores diferentes.")

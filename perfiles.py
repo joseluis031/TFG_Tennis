@@ -36,14 +36,14 @@ def mostrar_perfil(nombre, df_perfiles, superficie):
     # === Mostrar datos del perfil ===
     st.markdown(f"**Nacionalidad:** {row['Nacionality']}")
     st.markdown(f"**Edad:** {row['Age']}")
-    st.markdown(f"**Mano:** {row['Hand']}")
-    st.markdown(f"**Backhand:** {row['Backhand']}")
+    st.markdown(f"**Mano dominante:** {row['Hand']}")
+    st.markdown(f"**Golpe de revés:** {row['Backhand']}")
     st.markdown(f"**Elo Rank:** {row['Elo Rank']}")
 
     if superficie == "Clay":
         st.markdown(f"**Elo Rank en Superficie:** {row['cElo Rank']}")
     elif superficie == "Hard":
-        st.markdown(f"**hElo Rank en Superficie:** {row['hElo Rank']}")
+        st.markdown(f"**Elo Rank en Superficie:** {row['hElo Rank']}")
 
     sufijo = '_clay' if superficie == "Clay" else ''
     st.markdown(f"**Nivel Saque:** {dic_saque.get(row[f'saque{sufijo}'], 'Desconocido')}")
