@@ -6,10 +6,11 @@ El link del respositorio es el siguiente: [GitHub](https://github.com/joseluis03
 ## Ejecución de la interfaz gráfica
 
 ### Para ver el resultado final del informe es necesario ejecutar el siguiente comando
+1. py -m pip install -r requirements.txt
 
-py -m streamlit run stream.py
+2. py -m streamlit run stream.py
 
-Este comando ejecturá el script "stream.py" que abrirá la pagina web en un entorno local
+El primer comando descargará todas las librerias necesarias para un correcto funcionamiento y el segundo comando ejecutará el script "stream.py" que abrirá la pagina web en un entorno local
 
 Este archivo recoge todos los objetivos del proyecto accediendo a los siguientes archivos:
 - agente_llm.py : para obtener el análisis del modelo de LLM
