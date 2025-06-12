@@ -70,7 +70,7 @@ st.markdown("## 🧠 Informe táctico generado por IA")
 
 if nombre1 != nombre2:
     if st.button("🔍 Generar informe profesional con LLM"):
-        with st.spinner("Generando informe... esto puede tardar unos segundos..."):
+        with st.spinner("Generando informe... esto puede tardar unos minutos..."):
             resultado = generar_analisis_llm(nombre1, nombre2, df_llm)
             st.markdown("### 📝 Informe:")
             st.write(resultado)
