@@ -1,0 +1,8 @@
+pandas
+numpy
+matplotlib
+selenium
+beautifulsoup4
+openai
+Pillow
+streamlit
