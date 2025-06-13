@@ -5,7 +5,7 @@ En este repositorio se encuentra el INFORME ANALÍTICO Y PREDICTIVO DE UN PARTID
 El link del respositorio es el siguiente: [GitHub](https://github.com/joseluis031/TFG_Tennis.git)
 ## Ejecución de la interfaz gráfica
 
-### Para ver el resultado final del informe es necesario ejecutar el siguiente comando
+### Para ver el resultado final del informe es necesario ejecutar el siguiente comando, antes habría que añadir una API_KEY en un archivo .env
 1. py -m pip install -r requirements.txt
 
 2. py -m streamlit run stream.py
