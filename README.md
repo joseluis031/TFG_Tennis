@@ -206,7 +206,7 @@ Este archivo recoge todos los objetivos del proyecto accediendo a los siguientes
     Deploy your full analytical expertise. Create a professional scouting report that could be used by actual coaching teams. Every number matters, every tactical insight counts, and every recommendation should be match-winning intelligence.
 
     **Begin comprehensive analysis now.**
-'''
+    
 ### Carpeta imagenes
 
 Contiene las imagenes de los jugadores seleccionados
