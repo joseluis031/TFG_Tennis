@@ -1,8 +1,15 @@
 import pandas as pd
 import json
 from openai import OpenAI
+import os
+from dotenv import load_dotenv
 
-client = OpenAI(api_key="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")
+# === Carga la variable de entorno ===
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
+
+# === Crea el cliente con la clave segura ===
+client = OpenAI(api_key=api_key)
 
 def generar_analisis_llm(jug1, jug2, df):
     df_filtered = df[df["Player"].isin([jug1, jug2])].set_index("Player")
